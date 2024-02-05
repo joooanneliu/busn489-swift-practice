@@ -32,11 +32,15 @@ for i in letters[0...3] {
     print("third for loop: \(i)")
 }
 print()
-
 for i in letters[...2] {
     print("array for loop: \(i)")
 }
 
+// same as above (half-open as a one-sided range)
+for i in letters[..<3] {
+    print("array for loop 2: \(i)")
+}
 for i in letters[1...] {
     print(i)
 }
+
