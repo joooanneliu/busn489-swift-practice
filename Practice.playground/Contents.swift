@@ -44,3 +44,21 @@ for i in letters[1...] {
     print(i)
 }
 
+print()
+// fuction returning multiple values, array is argument label!
+func minMax(array: [Int])-> (min: Int, max: Int) {
+    var currMin = array[0]
+    var currMax = array[0]
+    
+    for i in array[1...] {
+        if i < currMin {
+            currMin = i
+        } else if i > currMax {
+            currMax = i
+        }
+    }
+    return (currMin, currMax)
+}
+
+let arr:[Int] = [0, -100, 4, 9, 2, 10]
+print(minMax(array: arr))
