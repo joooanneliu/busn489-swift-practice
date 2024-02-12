@@ -1,7 +1,7 @@
 // var is a constant
-var a:Int = 1
+var a_const:Int = 1
 // let is a variable
-let b:Int = 3
+let b_var:Int = 3
 
 var defaultColor:String = "red [DEFAULT]"
 var color: String? // defaults to nil with the ?
@@ -62,3 +62,40 @@ func minMax(array: [Int])-> (min: Int, max: Int) {
 
 let arr:[Int] = [0, -100, 4, 9, 2, 10]
 print(minMax(array: arr))
+
+func numModulo(dividend a:Int, divisor b:Int)-> Int {
+    return a % b
+}
+
+print(numModulo(dividend: 5, divisor:3))
+
+// a '+' in print does NOT add space
+print("hello" + "world")
+// a comma in print adds space
+print("howdy", "world!")
+
+// double = int multiplied by double is still exact
+var product:Double = 5 * 1.5
+var product2:Double = 5.0 * 1.5
+
+// int = double * int gives error
+// var product3:Int = 5 * 1.5
+
+// gives basic math functions i.e. sqrt and pow
+import Foundation
+var a:Int = 3
+var b:Int = 2
+var c:Double = 3
+var d:Double = 1/2
+
+var e:Double = 3/2
+// var f:Double = a/b ERROR, can't convert result to double
+var f:Int = a/b
+
+// pow has double as parameters
+// var power1:Double = pow(a, b)
+// var power2:Int = pow(c,d)
+// Int(...) = floor rounding
+var power2:Int = Int(pow(c, d))
+var power3:Double = pow(c, d)
+
