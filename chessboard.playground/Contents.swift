@@ -46,4 +46,5 @@ func isValid(_board :[[Int]], _ n:Int, _ row: Int, _ col: Int) -> Bool {
     return true
 }
 
+// loop through board to see if valid
 
