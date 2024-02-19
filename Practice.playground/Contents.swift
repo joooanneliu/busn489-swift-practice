@@ -93,9 +93,13 @@ var e:Double = 3/2
 var f:Int = a/b
 
 // pow has double as parameters
+
+// does not work because a and b are ints
 // var power1:Double = pow(a, b)
+// doesn't work because pow returns a double
 // var power2:Int = pow(c,d)
 // Int(...) = floor rounding
 var power2:Int = Int(pow(c, d))
 var power3:Double = pow(c, d)
 
+print(power2, power3)
