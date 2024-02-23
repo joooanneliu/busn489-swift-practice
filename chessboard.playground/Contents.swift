@@ -1,5 +1,5 @@
 // number of rows
-var n:Int = 4
+var n:Int = 8
 
 // creates n by n board initialized to 0s
 var board = Array(repeating: Array(repeating: 0, count: n), count: n)
@@ -56,10 +56,12 @@ var col:Int = 0
 // array of size n to store the column for each row where the pieces r placed
 var columns = Array(repeating: 0, count: n)
 
+// for i in 0...10 {
 while row < n {
     for j in columns[row] ..< n {
         if isValid(board, n, row, j) {
             board[row][j] = 1
+            // print("curr j:", j)
             columns[row] = j // update column position
             // ++ does not exist in Swift
             row += 1
@@ -67,14 +69,32 @@ while row < n {
         }
         // if on the last iteration and putting it in the last col doesn't work
         if (j == n - 1) {
+            // backtrack one row
             row -= 1
             board[row][columns[row]] = 0
+            // if already on last column, backtrack rows until there are available spots
+            while(columns[row] == n-1) {
+                row -= 1
+                board[row][columns[row]] = 0
+            }
+            // reset all columns for rows after back to 0
+            for h in row + 1 ..< n {
+                columns[h] = 0
+            }
             columns[row] += 1
         }
     }
-    print(row, columns[row])
+    
+    // Debugging
+//    print(row, columns[row])
+//    for i in 0 ..< n {
+//        print(board[i])
+//    }
+    
+
 }
 
-for i in 0 ..< n {
-    print(board[i])
-}
+
+ for i in 0 ..< n {
+     print(board[i])
+ }
