@@ -11,6 +11,7 @@
 		001586762B89DF57008E1BC9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001586752B89DF57008E1BC9 /* ContentView.swift */; };
 		001586782B89DF5B008E1BC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 001586772B89DF5B008E1BC9 /* Assets.xcassets */; };
 		0015867B2B89DF5B008E1BC9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0015867A2B89DF5B008E1BC9 /* Preview Assets.xcassets */; };
+		00C92BB72B998B3300544B5F /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C92BB62B998B3300544B5F /* Stopwatch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		001586752B89DF57008E1BC9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		001586772B89DF5B008E1BC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0015867A2B89DF5B008E1BC9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		00C92BB62B998B3300544B5F /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				001586732B89DF57008E1BC9 /* YouAreAwesomeApp.swift */,
+				00C92BB62B998B3300544B5F /* Stopwatch.swift */,
 				001586752B89DF57008E1BC9 /* ContentView.swift */,
 				001586772B89DF5B008E1BC9 /* Assets.xcassets */,
 				001586792B89DF5B008E1BC9 /* Preview Content */,
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				001586762B89DF57008E1BC9 /* ContentView.swift in Sources */,
+				00C92BB72B998B3300544B5F /* Stopwatch.swift in Sources */,
 				001586742B89DF57008E1BC9 /* YouAreAwesomeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
