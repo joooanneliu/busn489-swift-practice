@@ -1,15 +1,9 @@
-//
-//  TodoListView.swift
-//  YouAreAwesome
-//
-//  Created by Joanne Liu on 3/7/24.
-//
-
 import SwiftUI
 
 struct TodoItem: Identifiable {
     var id = UUID()
     var title: String
+    var completed: Bool = false // New property to track completion status
 }
 
 struct TodoListView: View {
@@ -19,18 +13,48 @@ struct TodoListView: View {
         TodoItem(title: "Go for a run")
     ]
     
+    @State private var newItemTitle: String = ""
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach(todoItems) { item in
-                    Text(item.title)
+                ForEach(todoItems.indices, id: \.self) { index in
+                    HStack {
+                        Button(action: {
+                            self.toggleItemCompletion(index: index)
+                        }) {
+                            Image(systemName: self.todoItems[index].completed ? "checkmark.square" : "square")
+                                .foregroundColor(.blue)
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+
+                        Text(self.todoItems[index].title)
+                            .strikethrough(self.todoItems[index].completed, color: .gray)
+
+                        Spacer()
+                        
+                        Button(action: {
+                               self.deleteTodoItem(at: index)
+                           }) {
+                               Image(systemName: "trash")
+                                   .foregroundColor(.red)
+                           }
+                           .buttonStyle(BorderlessButtonStyle())
+                    }
                 }
-                .onDelete(perform: deleteTodoItem)
+                .onDelete(perform: deleteTodoItems)
             }
             .navigationTitle("Todo List")
             .navigationBarItems(trailing:
-                Button(action: addTodoItem) {
-                    Image(systemName: "plus")
+                HStack {
+                    TextField("Add new item", text: $newItemTitle)
+                    
+                    Button(action: {
+                        self.addTodoItem()
+                        self.newItemTitle = ""
+                    }) {
+                        Image(systemName: "plus")
+                    }
                 }
             )
         }
@@ -41,7 +65,15 @@ struct TodoListView: View {
         todoItems.append(newItem)
     }
     
-    func deleteTodoItem(at offsets: IndexSet) {
+    func deleteTodoItem(at index: Int) {
+            todoItems.remove(at: index)
+        }
+    
+    func toggleItemCompletion(index: Int) {
+        todoItems[index].completed.toggle()
+    }
+    
+    func deleteTodoItems(at offsets: IndexSet) {
         todoItems.remove(atOffsets: offsets)
     }
 }
@@ -50,8 +82,4 @@ struct TodoListView_Previews: PreviewProvider {
     static var previews: some View {
         TodoListView()
     }
-}
-
-#Preview {
-    TodoListView()
 }
