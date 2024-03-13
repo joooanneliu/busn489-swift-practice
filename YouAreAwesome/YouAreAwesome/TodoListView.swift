@@ -4,64 +4,77 @@ struct TodoItem: Identifiable {
     var id = UUID()
     var title: String
     var completed: Bool = false // New property to track completion status
+    var category:String
 }
 
 struct TodoListView: View {
     @State private var todoItems: [TodoItem] = [
-        TodoItem(title: "Buy groceries"),
-        TodoItem(title: "Finish homework"),
-        TodoItem(title: "Go for a run")
+        TodoItem(title: "Buy groceries", category: "wtf self"),
+        TodoItem(title: "Finish HW8", category: "CSCE 411"),
+        TodoItem(title: "Finish Project 1", category: "CSCE411")
     ]
     
     @State private var newItemTitle: String = ""
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(todoItems.indices, id: \.self) { index in
-                    HStack {
-                        Button(action: {
-                            self.toggleItemCompletion(index: index)
-                        }) {
-                            Image(systemName: self.todoItems[index].completed ? "checkmark.square" : "square")
-                                .foregroundColor(.blue)
-                        }
-                        .buttonStyle(BorderlessButtonStyle())
+        List {
+            ForEach(todoItems.indices, id: \.self) { index in
+                HStack {
+                    // checkbox to allow users to check of to-do list items but not remove from to-do list yet
+                    Button(action: {
+                        self.toggleItemCompletion(index: index)
+                    }) {
+                        Image(systemName: self.todoItems[index].completed ? "checkmark.square" : "circle")
+                            .foregroundColor(.black)
+                    }
+                    .buttonStyle(BorderlessButtonStyle())
 
+                    VStack {
                         Text(self.todoItems[index].title)
                             .strikethrough(self.todoItems[index].completed, color: .gray)
-
-                        Spacer()
                         
-                        Button(action: {
-                               self.deleteTodoItem(at: index)
-                           }) {
-                               Image(systemName: "trash")
-                                   .foregroundColor(.red)
-                           }
-                           .buttonStyle(BorderlessButtonStyle())
+                        Text(self.todoItems[index].category)
+                           
                     }
-                }
-                .onDelete(perform: deleteTodoItems)
-            }
-            .navigationTitle("Todo List")
-            .navigationBarItems(trailing:
-                HStack {
-                    TextField("Add new item", text: $newItemTitle)
+
+                    Spacer()
+                    
                     
                     Button(action: {
-                        self.addTodoItem()
-                        self.newItemTitle = ""
-                    }) {
-                        Image(systemName: "plus")
-                    }
+                           self.deleteTodoItem(at: index)
+                       }) {
+                           Image(systemName: "x.circle")
+                               .foregroundColor(.gray)
+                       }
+                       .buttonStyle(BorderlessButtonStyle())
                 }
-            )
+            }
+            // onDelete allows user to swipe left to delete
+            .onDelete(perform: deleteTodoItems)
+            
+            
+            
+            VStack{
+                Text("Hello")
+            }
+            
         }
+        .navigationTitle("To-do List")
+        .navigationBarItems(trailing:
+            HStack {
+                Button(action: {
+                    self.addTodoItem()
+                    self.newItemTitle = ""
+                }) {
+                    Image(systemName: "plus")
+                }
+            }
+        )
+        
     }
     
     func addTodoItem() {
-        let newItem = TodoItem(title: "New To-do")
+        let newItem = TodoItem(title: "New To-do", category: "")
         todoItems.append(newItem)
     }
     
