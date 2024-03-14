@@ -27,7 +27,7 @@ struct TodoListRowView: View {
                     .frame(width: 300, height: 200)
                     .overlay(
                         VStack(spacing: 16) {
-                            TextField("Enter task name", text: $taskName)
+                            TextField("Task", text: $taskName)
                                 .padding(12)
                                 .background(Color.white)
                                 .cornerRadius(10)
@@ -36,7 +36,7 @@ struct TodoListRowView: View {
                                         .stroke(Color.black, lineWidth: 1)
                                 )
                             
-                            TextField("Enter text", text: $categoryName)
+                            TextField("Category", text: $categoryName)
                                 .padding(12)
                                 .background(Color.white)
                                 .cornerRadius(10)
