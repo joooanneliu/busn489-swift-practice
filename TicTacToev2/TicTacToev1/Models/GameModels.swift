@@ -45,7 +45,9 @@ struct Player{
     var isCurrent = false
     
     var isWinner:Bool{
+        // for every set of array in WinningMoves
         for moves in Moves.winningMoves{
+            // checks whether all three moves are in "moves" array
             if moves.allSatisfy(self.moves.contains){
                 return true
             }

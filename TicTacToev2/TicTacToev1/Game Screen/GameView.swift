@@ -21,8 +21,10 @@ struct GameView: View {
                         Text("Select a player to start")
                     }
                 
+                // player 1 and player 2 buttons
                 HStack{
                     Button(game.player1.name){
+                        // action for when button is pressed
                         game.player1.isCurrent = true
                     }
                     .padding(8)
@@ -42,11 +44,14 @@ struct GameView: View {
                     
                     
                 }//end of HStack
+                // buttons disabled when gameStarted is true
                 .disabled(game.gameStarted)
                 
                 //create game board here
                 VStack{
                     HStack{
+                        // for each iteration, index = 0, 1, and then 2
+                        // creates new instance of SquareView for each square
                         ForEach(0...2, id: \.self){
                             index in SquareView(index: index)
                         }

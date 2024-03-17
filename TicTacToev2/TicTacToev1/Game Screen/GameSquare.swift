@@ -15,10 +15,11 @@ struct GameSquare{
         //the line below is not checking for equality.
         //it is only testing for the existence of value within an optional
         
+        // if player is not nil, return the image of the same name
         if let player = player {
             return player.gamePiece.image
         }
-        else {
+        else { // if nil
             return Image("none")
         }
     }

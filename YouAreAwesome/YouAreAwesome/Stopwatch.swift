@@ -18,6 +18,7 @@ struct StopwatchView: View {
             
             switch managerClass.mode {
             case .stopped:
+                // adds play button, time reset to 0.0
                 withAnimation{
                     Button(action: {
                         managerClass.start()
@@ -31,6 +32,7 @@ struct StopwatchView: View {
                     })
                 }
             case .running:
+                // adds stop and pause button
                 HStack{
                     withAnimation{
                         Button(action: {
@@ -58,6 +60,7 @@ struct StopwatchView: View {
                     }
                 }
             case .paused:
+                // adds start and stop button
                 HStack {
                     withAnimation{
                         Button(action: {managerClass.start()}, label: {
@@ -87,18 +90,6 @@ struct StopwatchView: View {
         
             
             Text(String(format: "%.2f", managerClass.secondElapsed))
-            /*
-            Button(action: {
-                managerClass.start()
-            }, label: {
-                Image(systemName: "play.fill")
-                    .foregroundColor(.white)
-                    .font(.title)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(100)
-            })
-             */
         }
     }
 }

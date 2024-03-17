@@ -24,6 +24,7 @@ struct StartView: View {
     var body: some View {
         NavigationStack{
             VStack {
+                // drop down menu -> GameType
                 Picker("Select Game", selection: $gameType){
                     Text("Select game type").tag(GameType.undetermined)
                     
@@ -61,7 +62,7 @@ struct StartView: View {
                 
                 if gameType != .peer{
                     Button("Start Game"){
-                        
+                        // calls func from GameService file
                         game.setupGame(gameType: gameType, player1Name: yourName, player2Name: opponentName)
                         
                         focus = false
@@ -69,6 +70,7 @@ struct StartView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .disabled(
+                        // disables the "start game" button when text fields are empty
                         gameType == .undetermined ||
                         (gameType == .bot && yourName.isEmpty) ||
                         gameType == .single && (yourName.isEmpty || opponentName.isEmpty)
@@ -83,10 +85,12 @@ struct StartView: View {
             }
             .padding()
             .navigationTitle("Tic-Tac-Toe")
+            // essentially switches views
+            // currently, all modes go to gameview
             .fullScreenCover(isPresented: $startGame){
                 GameView()
             }
-        }
+        } // end of navigation stack
     }
 }
 

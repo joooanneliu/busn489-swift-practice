@@ -9,6 +9,7 @@ import SwiftUI
 @MainActor
 
 class GameService: ObservableObject{
+    // assigns x to player 1 and o to player 2
     @Published var player1 = Player(gamePiece: .x, name: "Player 1")
     @Published var player2 = Player(gamePiece: .o, name: "Player 2")
     @Published var possibleMoves = Moves.all
@@ -99,10 +100,13 @@ class GameService: ObservableObject{
             }
             checkIfWinner()
             if !gameOver {
+                // if first index of possible moves is equal to index + 1
+                // $0 means current value compared?
                 if let matchingIndex = possibleMoves.firstIndex(where: {$0 == (index+1)}) {
                     possibleMoves.remove(at: matchingIndex)
                 }
                 toggleCurrent()
+                print("Running\n")
             }
             if possibleMoves.isEmpty {
                 gameOver = true
