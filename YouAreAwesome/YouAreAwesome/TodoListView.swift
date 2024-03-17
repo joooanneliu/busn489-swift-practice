@@ -17,64 +17,68 @@ struct TodoListView: View {
     @State private var newItemTitle: String = ""
     
     var body: some View {
-        List {
-            ForEach(todoItems.indices, id: \.self) { index in
-                HStack {
-                    // checkbox to allow users to check of to-do list items but not remove from to-do list yet
-                    Button(action: {
-                        self.toggleItemCompletion(index: index)
-                    }) {
-                        Image(systemName: self.todoItems[index].completed ? "checkmark.square" : "circle")
-                            .foregroundColor(.black)
-                    }
-                    .buttonStyle(BorderlessButtonStyle())
-
-                    VStack {
-                        Text(self.todoItems[index].title)
-                            .strikethrough(self.todoItems[index].completed, color: .gray)
+        NavigationStack{
+            List {
+                ForEach(todoItems.indices, id: \.self) { index in
+                    HStack {
+                        // checkbox to allow users to check of to-do list items but not remove from to-do list yet
+                        Button(action: {
+                            self.toggleItemCompletion(index: index)
+                        }) {
+                            Image(systemName: self.todoItems[index].completed ? "checkmark.square" : "circle")
+                                .foregroundColor(.black)
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
                         
-                        Text(self.todoItems[index].category)
-                           
+                        VStack {
+                            Text(self.todoItems[index].title)
+                                .strikethrough(self.todoItems[index].completed, color: .gray)
+                            
+                            Text(self.todoItems[index].category)
+                            
+                        }
+                        
+                        Spacer()
+                        
+                        
+                        Button(action: {
+                            self.deleteTodoItem(at: index)
+                        }) {
+                            Image(systemName: "x.circle")
+                                .foregroundColor(.gray)
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
                     }
-
-                    Spacer()
-                    
-                    
+                }
+                // onDelete allows user to swipe left to delete
+                .onDelete(perform: deleteTodoItems)
+                
+                
+                
+                VStack{
+                    Text("Hello")
+                }
+                
+                
+            }.navigationTitle("To-do List")
+                .navigationBarItems(trailing: {
                     Button(action: {
-                           self.deleteTodoItem(at: index)
-                       }) {
-                           Image(systemName: "x.circle")
-                               .foregroundColor(.gray)
-                       }
-                       .buttonStyle(BorderlessButtonStyle())
-                }
-            }
-            // onDelete allows user to swipe left to delete
-            .onDelete(perform: deleteTodoItems)
-            
-            
-            
-            VStack{
-                Text("Hello")
-            }
-            
-        }
-        .navigationTitle("To-do List")
-        .navigationBarItems(trailing:
-            HStack {
-                Button(action: {
-                    self.addTodoItem()
-                    self.newItemTitle = ""
-                }) {
-                    Image(systemName: "plus")
-                }
-            }
-        )
+                        // Action to perform when the plus button is tapped
+                        addTodoItem()
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                }())
+            TodoListRowView()
+
+        } // end of navigation stack
         
     }
     
     func addTodoItem() {
         let newItem = TodoItem(title: "New To-do", category: "")
+        let taskName = TodoListRowView().getTaskName()
+        print(taskName)
         todoItems.append(newItem)
     }
     

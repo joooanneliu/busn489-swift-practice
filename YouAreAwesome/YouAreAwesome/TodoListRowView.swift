@@ -16,6 +16,7 @@ extension Color {
     }
 }
 
+// view for new todo list item
 struct TodoListRowView: View {
     @State private var taskName: String = ""
         @State private var categoryName: String = ""
@@ -58,8 +59,14 @@ struct TodoListRowView: View {
                         .padding(16)
                         
                     )
-            }
-        }
+            } // end of vstack
+        } // end of view
+    func getTaskName() -> String {
+        return taskName
+    }
+    func getCategoryName() -> String {
+        return categoryName
+    }
 }
 
 struct TodoListRowView_Previews: PreviewProvider {
