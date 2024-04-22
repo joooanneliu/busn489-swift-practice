@@ -15,13 +15,14 @@ struct ContentView: View {
         NavigationStack{
             VStack {
                 Text("Flag Count: \(game.flagCount)")
-                Button("start") {
-                    game.setUpBoard()
-                }
+//                Button("start") {
+//                    game.setUpBoard()
+//                }
                 
                 Button("reset") {
                     game.reset()
                 }
+                .disabled(!game.gameStart)
             }
             Spacer()
             // build 8 by 8 board
@@ -33,6 +34,13 @@ struct ContentView: View {
                             SquareView(index: count)
                         }
                     }
+                }
+                if(game.gameOver) {
+                    Text("Oh no! You hit a mine!").padding(.top, 20)
+                    Text("Click reset to restart")
+                }
+                if(!game.gameStart) {
+                    Text("Click on any square to begin").padding(.top, 20)
                 }
             } // end of board VStack
             

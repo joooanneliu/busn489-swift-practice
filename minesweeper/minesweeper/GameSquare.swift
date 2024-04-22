@@ -21,7 +21,7 @@ struct GameSquare {
     
     var mine:Bool = false // represents whether it is a mine or not
     var clicked:Bool = false // represents whether it has been clicked
-    var flagMode:Bool = false // represents whether flagmode is on when clicked
+    var flagMode:Bool = false // represents whether flagmode is on when clicked, or "flagged"
     // var gameOver:Bool // represents whether mine has been clicked
     var num:Int = 0 // number of mines around
     
