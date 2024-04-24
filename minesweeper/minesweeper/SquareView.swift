@@ -32,7 +32,7 @@ struct SquareView: View {
                     Text("")
                 }
             }
-        }
+        }.disabled(game.gameWin)
         
     }
 }

@@ -42,6 +42,9 @@ struct ContentView: View {
                 if(!game.gameStart) {
                     Text("Click on any square to begin").padding(.top, 20)
                 }
+                if(game.gameWin) {
+                    Text("YAY! YOU WON").padding(.top, 20)
+                }
             } // end of board VStack
             
             Spacer()
@@ -54,7 +57,7 @@ struct ContentView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 30, height: 30)
                         .padding(5)
-                        .background(game.flagMode ? Color("selectGray") : Color.white)
+                        .background(game.flagMode ? Color("paleYellow") : Color.white)
                         .cornerRadius(8)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
@@ -69,7 +72,7 @@ struct ContentView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 30, height: 30)
                         .padding(5)
-                        .background(!game.flagMode ? Color("selectGray") : Color.white)
+                        .background(!game.flagMode ? Color("paleYellow") : Color.white)
                         .foregroundColor(.white)
                         .cornerRadius(8)
                         .overlay(

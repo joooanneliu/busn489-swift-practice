@@ -40,7 +40,7 @@ struct ContentView: View {
                     .padding()
                     .background(Color("PastelBlue"))
                     .cornerRadius(15)
-                
+                    
                 Spacer()
                 Text(messageString)
                     .font(.title2)

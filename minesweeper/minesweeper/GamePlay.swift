@@ -15,6 +15,8 @@ class GamePlay: ObservableObject {
     @Published var gameOver = false
     @Published var flagMode = false
     @Published var flagCount:Int = 0
+    @Published var gameWin = false
+    
     
     func setUpBoard(at index:Int) {
         // put 10 mines randomly
@@ -49,16 +51,11 @@ class GamePlay: ObservableObject {
         gameBoard = GameSquare.reset
         gameStart = false
         gameOver = false
+        gameWin = false
+        flagCount = 0
+        flagMode = false
     }
-    
-    
-    // 0 1 2 3 4 5 6 7
-    // 8 9 10 11 12 13 14 15
-    // 16 17 18 19 20 21 22 23
 
-    // 11: 2, 3, 4, 10, 12, 18, 19, 20
-    
-    // NEED TO FIX since for the edges of the square, checks the wrong indicies
     func setNum(at index:Int) {
         // set pos at square diagonally above and left of index
         let row:Int = index / 8
@@ -123,6 +120,10 @@ class GamePlay: ObservableObject {
         for i in 0...63{
             if(!gameBoard[i].clicked) {
                 gameBoard[i].clicked = true
+            } else {
+                if(gameBoard[i].flagMode && !gameBoard[i].mine) {
+                    gameBoard[i].flagMode = false
+                }
             }
         }
     }
@@ -142,9 +143,11 @@ class GamePlay: ObservableObject {
                 if(gameBoard[index].mine) {
                     gameOver = true
                     revealAll()
+                } else if(gameBoard[index].num == 0) {
+                    reveal(at: index)
                 }
             }
-            
+            gameWin = checkWin()
         } else {
             // if clicked and in flagMode
             if(flagMode) {
@@ -153,6 +156,21 @@ class GamePlay: ObservableObject {
                 flagCount -= 1
             }
         }
+    }
+    
+    // returns whether user has won the game
+    func checkWin()-> Bool {
+        // all squares have been clicked and no mines, or there are no none-mine squares to click on = win
+        if(gameOver) {
+            return false
+        }
+        for i in 0...63{
+            if(!gameBoard[i].clicked && !gameBoard[i].mine) {
+                // print(i)
+                return false
+            }
+        }
+        return true
     }
     
 }
