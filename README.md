@@ -1,3 +1,6 @@
+Here is the link to the repository for the group project:
+<a href = "https://github.com/joooanneliu/ait-app">Clocked In</a>
+
 <h1>Minesweeper</h1>
 Minesweeper is a simple version of the classic game coded on Swift where users have to flag 10 mines. The user can toggle between two nodes when clicking on a square: flag and dig mode.
 The game follows the regular rules of the game and when a blank square is dug, all the adjacent blank squares are revealed also.
